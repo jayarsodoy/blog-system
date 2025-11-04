@@ -20,13 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const result = await response.json();
 
-      modal.style.display = 'flex';
+      modal.classList.add('show');;
       modalTitle.textContent = result.success ? 'Success!' : 'Error';
       modalMessage.textContent = result.message;
 
       if (result.success) postForm.reset();
     } catch (err) {
-      modal.style.display = 'flex';
+      modal.classList.add('show');
       modalTitle.textContent = 'Error';
       modalMessage.textContent = 'Something went wrong. Please try again.';
     }
@@ -67,13 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const result = await response.json();
 
-      modal.style.display = 'flex';
+      modal.classList.add('show');
       modalTitle.textContent = result.success ? 'Success!' : 'Error';
       modalMessage.textContent = result.message;
 
       if (result.success) postForm.reset();
     } catch (err) {
-      modal.style.display = 'flex';
+      modal.classList.add('show');;
       modalTitle.textContent = 'Error';
       modalMessage.textContent = 'Something went wrong. Please try again.';
     }

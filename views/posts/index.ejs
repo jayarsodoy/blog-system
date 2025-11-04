@@ -1,4 +1,4 @@
- <div class="posts-container">
+ <div class="posts-container index-page">
     <% if (typeof user === 'undefined' || !user) { %>
         <div class="posts-header">
             <h1 class="page-title">Welcome to BlogHub</h1>
@@ -12,10 +12,12 @@
                 </button>
             </div>
         </div>
+        <h1 class="page-title">Featured Posts</h1>
+    <% } else { %>
+            <h1 class="page-title">Latest Post</h1>
     <% } %>
-    <!-- Posts Grid -->
-    <h1 class="page-title">Featured Posts</h1>
 
+    <!-- Posts Grid -->
     <% if (posts && posts.length > 0) { %>
         <div class="posts-grid">
             <% posts.forEach(post => { %>
@@ -40,7 +42,7 @@
                                 <span class="stat">❤️ <%= post.likes_count %> Likes</span>
                             <% } %>
                         </div>
-                        <a href="/posts/view/<%= post.id %>/<%= user ? user.id : '' %>" class="btn btn-secondary btn-sm">Read More</a>
+                        <a href="/posts/view/<%= post.id %>/<%= user ? user.id : 'guest' %>" class="btn btn-secondary btn-sm">Read More</a>
                     </div>
                 </article>
             <% }); %>
@@ -58,5 +60,9 @@
         </div>
     <% } %>
 
-    
+    <div id="loading" style="text-align:center; display:none;">
+        <p>Loading more posts...</p>
+    </div>
+
 </div>
+

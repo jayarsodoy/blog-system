@@ -110,6 +110,37 @@ if (commentForm) {
 }
 
 // ============================================
+// LOGOUT MODAL FUNCTIONALITY
+// ============================================
+const logoutLink = document.querySelector('.nav-btn-logout');
+const logoutModal = document.getElementById('logoutModal');
+const confirmLogout = document.getElementById('confirmLogout');
+const cancelLogout = document.getElementById('cancelLogout');
+
+if (logoutLink) {
+  logoutLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    logoutModal.classList.add('show');
+  });
+}
+
+confirmLogout.addEventListener('click', function () {
+  window.location.href = '/logout';
+});
+
+cancelLogout.addEventListener('click', function () {
+  logoutModal.classList.remove('show');
+});
+
+window.addEventListener('click', function (e) {
+  if (e.target === logoutModal) {
+    logoutModal.classList.remove('show');
+  }
+});
+
+
+
+// ============================================
 // UTILITY FUNCTIONS
 // ============================================
 
@@ -134,47 +165,19 @@ function clearError(elementId) {
   }
 }
 
-// ============================================
-// LIKE FUNCTIONALITY
-// ============================================
+// // ============================================
+// // AUTO-HIDE ALERTS
+// // ============================================
 
-const likeBtn = document.getElementById("likeBtn")
-if (likeBtn) {
-  likeBtn.addEventListener("click", async function () {
-    const postId = this.dataset.postId
-
-    try {
-      const response = await fetch(`/posts/${postId}/like`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        document.getElementById("likeCount").textContent = data.likes_count
-        document.getElementById("likeIcon").textContent = data.liked ? "❤️" : "🤍"
-      }
-    } catch (error) {
-      console.error("Error liking post:", error)
-    }
-  })
-}
-
-// ============================================
-// AUTO-HIDE ALERTS
-// ============================================
-
-document.addEventListener("DOMContentLoaded", () => {
-  const alerts = document.querySelectorAll(".alert")
-  alerts.forEach((alert) => {
-    setTimeout(() => {
-      alert.style.opacity = "0"
-      alert.style.transition = "opacity 0.3s ease-in-out"
-      setTimeout(() => {
-        alert.style.display = "none"
-      }, 300)
-    }, 5000)
-  })
-})
+// document.addEventListener("DOMContentLoaded", () => {
+//   const alerts = document.querySelectorAll(".alert")
+//   alerts.forEach((alert) => {
+//     setTimeout(() => {
+//       alert.style.opacity = "0"
+//       alert.style.transition = "opacity 0.3s ease-in-out"
+//       setTimeout(() => {
+//         alert.style.display = "none"
+//       }, 300)
+//     }, 5000)
+//   })
+// })

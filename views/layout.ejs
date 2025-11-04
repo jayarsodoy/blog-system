@@ -6,31 +6,46 @@
     <title><%= typeof title !== 'undefined' ? title : 'Blog System' %></title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/reset.css">
+    
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-container"> 
             <div class="navbar-brand">
-                <a href="/" class="logo">📝 BlogHub</a>
+                <a href="/" class="logo"> &lt;/&gt;BlogHub</a>
             </div>
             <ul class="navbar-menu">
                 <% if (typeof user !== 'undefined' && user) { %>
-                    <li><a href="/" class="nav-link">Home</a></li>
-                    <li><a href="/posts/explore" class="nav-link">Explore</a></li>
+                    <li>
+                        <a href="/" class="nav-link <%= title === 'Posts' ? 'active-link' : '' %>"> Home</a>
+                    </li>
+                    <li><a href="/posts/explore" class="nav-link <%= title === 'Explore' ? 'active-link' : '' %>">Explore</a></li>
                     <li><a href="/posts/create" class="nav-link nav-btn-primary">+ New Post</a></li>
-                    <li class="nav-user">
-                        <a href="/users/profile" class="nav-link"><span class="user-name"><%= user.username %></span></a>
-                        <a href="/logout" class="nav-link nav-btn-logout">Logout</a>
+                    <li><a href="/users/profile" class="nav-link user-profile <%= title === 'User Profile' ? 'active-link' : '' %>"></a></li>
+                    <li>
+                        <a href="/logout" class="nav-link nav-btn-logout"></a>
                     </li>
                 <% } else { %>
-                    <li><a href="/" class="nav-link">Home</a></li>
-                    <li><a href="/posts/explore" class="nav-link">Explore</a></li>
-                    <li><a href="/login" class="nav-link">Login</a></li>
+                    <li><a href="/" class="nav-link <%= title === 'Posts' ? 'active-link' : '' %>">Home</a></li>
+                    <li><a href="/posts/explore" class="nav-link <%= title === 'Explore' ? 'active-link' : '' %>">Explore</a></li>
+                    <li><a href="/login" class="nav-link <%= title === 'Login' ? 'active-link' : '' %>">Login</a></li>
                     <li><a href="/register" class="nav-link nav-btn-primary">Register</a></li>
                 <% } %>
             </ul>
         </div>
     </nav>
+
+     <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Are you sure you want to logout?</h3>
+            <div class="modal-actions">
+                <button id="confirmLogout" class="btn btn-danger">Yes, Logout</button>
+                <button id="cancelLogout" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
 
     <main class="main-content">
         <% if (typeof message !== 'undefined' && message) { %>
@@ -47,6 +62,8 @@
         <% } %>
         
         <%- body %>
+
+        
     </main>
 
     <footer class="footer">
@@ -56,7 +73,10 @@
         </div>
     </footer>
 
+   
+
     <script src="/js/main.js"></script>
+    <script src="/js/load-post.js"></script>
     <script src="/js/create-post.js"></script>
     <script src="/js/filter-posts.js"></script>
 </body>

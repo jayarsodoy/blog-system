@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 
 const router = express.Router();
 
-router.get("/profile", showProfilePage);
+router.get("/profile", isAuthenticated, showProfilePage);
 
 
 

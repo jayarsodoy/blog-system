@@ -6,7 +6,10 @@ import { showPostPage } from "../controllers/postController.js";
 // Show register user page
 export const showRegisterUserPage = async (req, res) => {
   try {
-    res.render("auth/register");
+    res.render("auth/register",{
+      layout: "layout",
+      title: "Register",
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
@@ -33,8 +36,11 @@ export const registerUser = async (req, res) => {
 // Show login user page
 export const showLoginUserPage = (req, res) => {
   try {
-    res.render("auth/login");
-    // res.render("auth/auth", { users });
+    res.render("auth/login",{
+      layout: "layout",
+      title: "Login",
+    });
+
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
@@ -58,12 +64,7 @@ export const loginUser = async (req, res) => {
       username: user.username,
       email: user.email
     };
-    // For now, just show success (later you can add session)
-    
-    // res.render("layout", { 
-    //   title: 'Dashboard', 
-    //   user: req.session.user
-    // });
+
     showPostPage(req, res);
   } catch (error) {
     console.error(error);

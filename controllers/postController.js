@@ -1,15 +1,43 @@
 
-import { getAllPosts, createPost, updatePost, postPerUser, deletePost } from "../models/postModel.js";
+import { getAllPosts, getPaginatedPosts,  createPost, updatePost, postPerUser, deletePost, getPostById } from "../models/postModel.js";
 import { getCommentById } from "../models/commentModel.js";
 
+// export const showPostPage = async (req, res) => {
+//   try {
+//     const posts = await getAllPosts();
+//     req.session.posts = posts;
+//     res.render("posts/index", { layout: "layout", title: "Posts", user: req.session.user, posts: posts });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send("Server Error");
+//   }
+// };
+
+// showPostPage
 export const showPostPage = async (req, res) => {
   try {
-    const posts = await getAllPosts();
-    req.session.posts = posts;
-    res.render("posts/index", { layout: "layout", title: "Posts", user: req.session.user, posts: posts });
+    const posts = await getPaginatedPosts(5, 0); 
+    res.render("posts/index", {
+      layout: "layout",
+      title: "Posts",
+      user: req.session.user,
+      posts
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
+  }
+};
+
+
+export const loadMorePosts = async (req, res) => {
+  try {
+    const offset = parseInt(req.query.offset) || 0;
+    const posts = await getPaginatedPosts(5, offset);
+    res.json(posts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to load more posts" });
   }
 };
 
@@ -17,7 +45,7 @@ export const showExplorePage = async (req, res) => {
   try {
     const posts = await getAllPosts();
     req.session.posts = posts;
-    res.render("posts/explore", { layout: "layout", title: "Posts", user: req.session.user, posts: posts });
+    res.render("posts/explore", { layout: "layout", title: "Explore", user: req.session.user, posts: posts });
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
@@ -70,14 +98,37 @@ export const updateCurrentPost = async (req, res) => {
 };
 
 
+// export const viewFullPost = async (req, res) => {
+//   const { postId } = req.params;
+//   const { userId } = req.params;
+//   const comments = await getCommentById(postId);
+//   console.log("Viewing post with ID:", postId);
+//   console.log("Viewing post with ID:", userId);
+//   req.session.comments = comments;
+//   res.render("posts/show", { layout: "layout", title: "View Post", user: req.session.user, post: req.session.posts.find(p => p.id == postId), comments: comments });
+// };
+
 export const viewFullPost = async (req, res) => {
-  const { postId } = req.params;
-  const { userId } = req.params;
-  const comments = await getCommentById(postId);
-  console.log("Viewing post with ID:", postId);
-  console.log("Viewing post with ID:", userId);
-  req.session.comments = comments;
-  res.render("posts/show", { layout: "layout", title: "View Post", user: req.session.user, post: req.session.posts.find(p => p.id == postId), comments: comments });
+  try {
+    const { postId } = req.params;
+    const post = await getPostById(postId);
+    const comments = await getCommentById(postId);
+
+    if (!post) {
+      return res.status(404).send("Post not found");
+    }
+
+    res.render("posts/show", {
+      layout: "layout",
+      title: post.title,
+      user: req.session.user,
+      post,
+      comments,
+    });
+  } catch (err) {
+    console.error("Error loading post:", err);
+    res.status(500).send("Server Error");
+  }
 };
 
 export const editPost = async (req, res) => {

@@ -42,7 +42,7 @@
                                     <span class="stat">❤️ <%= post.likes_count %> Likes</span>
                                 <% } %>
                             </div>
-                            <a href="/posts/view/<%= post.id %>/<%= user.id %>" class="btn btn-secondary btn-sm">Read More</a>
+                            <a href="/posts/view/<%= post.id %>/<%= user ? user.id : 'guest' %>" class="btn btn-secondary btn-sm">Read More</a>
                         </div>
                     </article>
                 <% }); %>

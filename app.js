@@ -39,14 +39,14 @@ app.set("view cache", false);
 app.use(
   session({
     store: new PgSession({
-      pool: pool, // reuse your PostgreSQL pool
+      pool: pool,
       tableName: "user_sessions"
     }),
-    secret: "mysecretkey", // change this to something strong in production
+    secret: "mysecretkey",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 // 1 day
+      maxAge: 1000 * 60 * 60 * 24 
     }
   })
 );
@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 app.use("/", authRoutes);
 app.use("/posts", postRoutes);
 app.use("/users", userRoutes);
-app.use("/comments", commentRoutes); // Add this line to include comment routes
+app.use("/comments", commentRoutes);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
