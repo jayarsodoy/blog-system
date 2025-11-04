@@ -24,7 +24,7 @@
                     <article class="post-card">
                         <div class="post-card-header">
                             <h2 class="post-title">
-                                <a href="/posts/<%= post.id %>" class="post-link"><%= post.title %></a>
+                                <a href="/posts/view/<%= post.id %>/<%= user ? user.id : 'guest' %>" class="post-link"><%= post.title %></a>
                                 <p class="post-category"> <%= post.category.charAt(0).toUpperCase() + post.category.slice(1) %></p>
                             </h2>
                             <p class="post-meta">
