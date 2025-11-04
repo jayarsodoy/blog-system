@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog System - Home</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-brand">
+        <a href="/" class="logo">📝 BlogHub</a>
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/explore" class="nav-link">Explore</a></li>
+        <li><a href="/create-post" class="nav-link">Create Post</a></li>
+        <li><a href="/login" class="nav-link nav-btn-primary">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="posts-container">
+      <div class="posts-header">
+        <h1 class="page-title">Welcome to BlogHub</h1>
+        <p class="page-subtitle">Discover amazing stories and insights from our community</p>
+      </div>
+
+      <!-- Posts Grid -->
+      <div class="posts-grid">
+        <!-- Post Card 1 -->
+        <article class="post-card">
+          <div class="post-card-header">
+            <h2 class="post-title">
+              <a href="/posts/1" class="post-link">Getting Started with Web Development</a>
+            </h2>
+            <div class="post-meta">
+              By <span class="author-name">John Doe</span> • 2 days ago
+            </div>
+          </div>
+          <p class="post-excerpt">
+            Learn the fundamentals of web development including HTML, CSS, and JavaScript. This comprehensive guide will help you start your journey as a web developer.
+          </p>
+          <div class="post-card-footer">
+            <div class="post-stats">
+              <div class="stat">💬 5 comments</div>
+              <div class="stat">❤️ 12 likes</div>
+            </div>
+            <a href="/posts/1" class="btn btn-secondary btn-sm">Read More</a>
+          </div>
+        </article>
+
+        <!-- Post Card 2 -->
+        <article class="post-card">
+          <div class="post-card-header">
+            <h2 class="post-title">
+              <a href="/posts/2" class="post-link">Advanced JavaScript Techniques</a>
+            </h2>
+            <div class="post-meta">
+              By <span class="author-name">Jane Smith</span> • 5 days ago
+            </div>
+          </div>
+          <p class="post-excerpt">
+            Explore advanced JavaScript concepts like closures, async/await, and functional programming. Perfect for developers looking to level up their skills.
+          </p>
+          <div class="post-card-footer">
+            <div class="post-stats">
+              <div class="stat">💬 8 comments</div>
+              <div class="stat">❤️ 24 likes</div>
+            </div>
+            <a href="/posts/2" class="btn btn-secondary btn-sm">Read More</a>
+          </div>
+        </article>
+
+        <!-- Post Card 3 -->
+        <article class="post-card">
+          <div class="post-card-header">
+            <h2 class="post-title">
+              <a href="/posts/3" class="post-link">Building Responsive Websites</a>
+            </h2>
+            <div class="post-meta">
+              By <span class="author-name">Mike Johnson</span> • 1 week ago
+            </div>
+          </div>
+          <p class="post-excerpt">
+            Master the art of creating responsive websites that work seamlessly across all devices. Learn CSS Grid, Flexbox, and media queries.
+          </p>
+          <div class="post-card-footer">
+            <div class="post-stats">
+              <div class="stat">💬 3 comments</div>
+              <div class="stat">❤️ 18 likes</div>
+            </div>
+            <a href="/posts/3" class="btn btn-secondary btn-sm">Read More</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 BlogHub. All rights reserved.</p>
+      <p>Built with HTML, CSS, and JavaScript</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

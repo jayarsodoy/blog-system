@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Blog System</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-brand">
+        <a href="/" class="logo">📝 BlogHub</a>
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/login" class="nav-link nav-btn-primary">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="auth-container">
+      <div class="auth-card">
+        <h1 class="auth-title">Create Account</h1>
+        <p class="auth-subtitle">Join our community and start blogging</p>
+
+        <form id="registerForm" class="auth-form" action="/register" method="POST">
+          <div class="form-group">
+            <label for="username" class="form-label">Username</label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              class="form-input" 
+              placeholder="johndoe"
+              required
+            >
+            <span id="usernameError" class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              class="form-input" 
+              placeholder="you@example.com"
+              required
+            >
+            <span id="emailError" class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              class="form-input" 
+              placeholder="••••••••"
+              required
+            >
+            <span id="passwordError" class="form-error"></span>
+            <p class="form-hint">Must be at least 6 characters</p>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              name="confirmPassword" 
+              class="form-input" 
+              placeholder="••••••••"
+              required
+            >
+            <span id="confirmPasswordError" class="form-error"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+        </form>
+
+        <div class="auth-footer">
+          Already have an account? 
+          <a href="/login" class="auth-link">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 BlogHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

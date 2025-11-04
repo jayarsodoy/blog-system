@@ -1,0 +1,57 @@
+<div class="form-container">
+    <div class="form-card">
+    <h1 class="form-title">Edit Post</h1>
+
+    <form id="editForm" class="auth-form">
+        <div class="form-group">
+        <label for="title" class="form-label">Post Title</label>
+        <input 
+            type="text" 
+            id="title" 
+            name="title" 
+            class="form-input" 
+            value="<%= post.title %>"
+            required
+        >
+        </div>
+
+        <div class="form-group">
+        <label for="category" class="form-label">Category</label>
+        <select id="category" name="category" class="form-input" required>
+            <option value="tutorial" <%= post.category === 'tutorial' ? 'selected' : '' %>>Tutorial</option>
+            <option value="opinion" <%= post.category === 'opinion' ? 'selected' : '' %>>Opinion</option>
+            <option value="guide" <%= post.category === 'guide' ? 'selected' : '' %>>Guide</option>
+            <option value="news" <%= post.category === 'news' ? 'selected' : '' %>>News</option>
+            <option value="other" <%= post.category === 'other' ? 'selected' : '' %>>Other</option>
+        </select>
+
+        </div>
+
+        <div class="form-group">
+        <label for="content" class="form-label">Content</label>
+        <textarea 
+            id="content" 
+            name="content" 
+            class="form-textarea" 
+            rows="12"
+            required
+
+        ><%= post.content %></textarea>
+        <p class="form-hint"></p>
+        </div>
+
+        <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-full">Update Post</button>
+        <a href="/users/profile" class="btn btn-secondary btn-full">Cancel</a>
+        </div>
+    </form>
+    </div>
+</div>
+
+<div id="statusModal" class="modal">
+  <div class="modal-content">
+    <h2 id="modalTitle"></h2>
+    <p id="modalMessage"></p>
+    <a href="/users/profile"><button id="closeModal" class="btn btn-primary">  OK </button> </a>
+  </div>
+</div>

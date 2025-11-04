@@ -1,0 +1,100 @@
+<div class="post-detail-container">
+    <article class="post-detail">
+        <div class="post-detail-header">
+            <h1 class="post-detail-title post-title"><%= post.title %> 
+                <p class="post-category"> <%= post.category.charAt(0).toUpperCase() + post.category.slice(1) %></p>
+            </h1> 
+            <div class="post-detail-meta">
+                <div class="meta-left">
+                    <span class="author-badge">
+                        <span class="author-avatar"><%= post.author_username.charAt(0).toUpperCase() %></span>
+                        <div>
+                            <p class="author-name"><%= post.author_username %></p>
+                            <time datetime="<%= post.created_at %>" class="post-date">
+                                <%= new Date(post.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                            </time>
+                        </div>
+                    </span>
+                </div>
+                <% if (typeof user !== 'undefined' && user && user.id === post.author_id) { %>
+                    <div class="meta-actions">
+                        <a href="/posts/<%= post.id %>/edit" class="btn btn-secondary btn-sm">Edit</a>
+                        <form method="POST" action="/posts/<%= post.id %>/delete" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="post-content">
+            <%- post.content %>
+        </div>
+
+        <div class="post-footer">
+            <div class="post-actions">
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <button class="btn-action" id="likeBtn" data-post-id="<%= post.id %>">
+                        <span id="likeIcon">🤍</span> <span id="likeCount"><%= post.likes_count || 0 %></span>
+                    </button>
+                <% } else { %>
+                    <span class="btn-action-disabled">🤍 <%= post.likes_count || 0 %></span>
+                <% } %>
+            </div>
+        </div>
+    </article>
+
+    <!-- Comments Section -->
+    <section class="comments-section">
+        <h2 class="comments-title">Comments (<%= comments.length %>)</h2>
+
+        <% if (typeof user !== 'undefined' && user) { %>
+            <form method="POST" action="/comments/<%= post.id %>/<%= user.id %>" class="comment-form" id="commentForm">
+                <div class="form-group">
+                    <label for="content" class="form-label">Add a comment</label>
+                    <textarea 
+                        id="content" 
+                        name="content" 
+                        class="form-textarea" 
+                        placeholder="Share your thoughts..."
+                        rows="4"
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Post Comment</button>
+            </form>
+        <% } else { %>
+            <div class="comment-login-prompt">
+                <p><a href="/login" class="auth-link">Sign in</a> to leave a comment</p>
+            </div>
+        <% } %>
+
+        <div class="comments-list">
+            <% if (comments && comments.length > 0) { %>
+                <% comments.forEach(comment => { %>
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <div class="comment-author">
+                                <span class="comment-avatar"><%= comment.author_username.charAt(0).toUpperCase() %></span>
+                                <div>
+                                    <p class="comment-author-name"><%= comment.author_username %></p>
+                                    <time datetime="<%= comment.created_at %>" class="comment-date">
+                                        <%= new Date(comment.created_at).toLocaleDateString() %>
+                                    </time>
+                                </div>
+                            </div>
+                            <% if (typeof user !== 'undefined' && user && user.id === comment.author_id) { %>
+                                <form method="POST" action="/comments/<%= comment.id %>/delete" style="display: inline;" onsubmit="return confirm('Delete this comment?');">
+                                    <button type="submit" class="btn-delete-comment">×</button>
+                                </form>
+                            <% } %>
+                        </div>
+                        <p class="comment-content"><%= comment.content %></p>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="no-comments">No comments yet. Be the first to comment!</p>
+            <% } %>
+        </div>
+    </section>
+</div>

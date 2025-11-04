@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title !== 'undefined' ? title : 'Blog System' %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/reset.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container"> 
+            <div class="navbar-brand">
+                <a href="/" class="logo">📝 BlogHub</a>
+            </div>
+            <ul class="navbar-menu">
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/posts/explore" class="nav-link">Explore</a></li>
+                    <li><a href="/posts/create" class="nav-link nav-btn-primary">+ New Post</a></li>
+                    <li class="nav-user">
+                        <a href="/users/profile" class="nav-link"><span class="user-name"><%= user.username %></span></a>
+                        <a href="/logout" class="nav-link nav-btn-logout">Logout</a>
+                    </li>
+                <% } else { %>
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/posts/explore" class="nav-link">Explore</a></li>
+                    <li><a href="/login" class="nav-link">Login</a></li>
+                    <li><a href="/register" class="nav-link nav-btn-primary">Register</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <% if (typeof message !== 'undefined' && message) { %>
+            <div class="alert alert-success">
+                <%= message %>
+                <button class="alert-close" onclick="this.parentElement.style.display='none';">&times;</button>
+            </div>
+        <% } %>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-error">
+                <%= error %>
+                <button class="alert-close" onclick="this.parentElement.style.display='none';">&times;</button>
+            </div>
+        <% } %>
+        
+        <%- body %>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 BlogHub. All rights reserved.</p>
+            <p>Built with Node.js, Express & PostgreSQL</p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/create-post.js"></script>
+    <script src="/js/filter-posts.js"></script>
+</body>
+</html>

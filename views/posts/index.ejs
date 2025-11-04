@@ -1,0 +1,62 @@
+ <div class="posts-container">
+    <% if (typeof user === 'undefined' || !user) { %>
+        <div class="posts-header">
+            <h1 class="page-title">Welcome to BlogHub</h1>
+            <p class="page-subtitle">Discover amazing stories and insights from our community</p>
+            <div>
+                <button class="btn btn-primary" style="margin-top: 10px; padding: 10px;">
+                    <a href="/register">Get Started</a>
+                </button>
+                <button class="btn btn-secondary" style="margin-top: 10px; padding: 10px;">
+                    <a href="/posts/explore">Explore Posts</a>
+                </button>
+            </div>
+        </div>
+    <% } %>
+    <!-- Posts Grid -->
+    <h1 class="page-title">Featured Posts</h1>
+
+    <% if (posts && posts.length > 0) { %>
+        <div class="posts-grid">
+            <% posts.forEach(post => { %>
+                <article class="post-card">
+                    <div class="post-card-header">
+                        <h2 class="post-title">
+                            <a href="/posts/view/<%= post.postId %>" class="post-link"><%= post.title %> </a>
+                            <p class="post-category"> <%= post.category.charAt(0).toUpperCase() + post.category.slice(1) %></p>
+                        </h2>
+                        <p class="post-meta">
+                            By <span class="author-name"><%= post.author_username %></span> 
+                            • <time datetime="<%= post.created_at %>"><%= new Date(post.created_at).toLocaleDateString() %></time>
+                        </p>
+                    </div>
+                    
+                    <p class="post-excerpt"><%= post.content.substring(0, 150) %>...</p>
+                    
+                    <div class="post-card-footer">
+                        <div class="post-stats">
+                            <span class="stat">💬 <%= post.comment_count || 0 %> Comments</span>
+                            <% if (post.likes_count) { %>
+                                <span class="stat">❤️ <%= post.likes_count %> Likes</span>
+                            <% } %>
+                        </div>
+                        <a href="/posts/view/<%= post.id %>/<%= user ? user.id : '' %>" class="btn btn-secondary btn-sm">Read More</a>
+                    </div>
+                </article>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <div class="empty-state">
+            <p class="empty-icon">📭</p>
+            <h2>No posts yet</h2>
+            <p>Be the first to share your thoughts!</p>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <a href="/posts/create" class="btn btn-primary">Create First Post</a>
+            <% } else { %>
+                <a href="/auth/login" class="btn btn-primary">Sign in to create a post</a>
+            <% } %>
+        </div>
+    <% } %>
+
+    
+</div>
